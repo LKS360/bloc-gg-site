@@ -6,8 +6,12 @@ const SteamStrategy = require('passport-steam').Strategy;
 const app = express();
 
 // --- CONFIGURAÇÃO ---
-// COLOCAR SUA API KEY AQUI:
+// Sua API Key da Steam
 const STEAM_API_KEY = 'A7FCD68DE3AF9C0B12FF525BD5364F21'; 
+
+// SEU LINK DO RAILWAY (Sem barra no final para facilitar)
+// IMPORTANTE: Se o link do Railway mudar, altere apenas aqui!
+const RAILWAY_URL = 'https://bloc-gg-site-production.up.railway.app';
 
 // Configuração do Passport (o porteiro)
 passport.serializeUser((user, done) => {
@@ -19,17 +23,18 @@ passport.deserializeUser((obj, done) => {
 });
 
 passport.use(new SteamStrategy({
-    // CUIDADO: Mantenha o final /auth/steam/return
-    returnURL: 'https://bloc-gg-site-production.up.railway.app//auth/steam/return',
-    
-    // Aqui é só o link base com a barra no final
-    realm: 'https://bloc-gg-site-production.up.railway.app/',
-    
-    apiKey: 'A7FCD68DE3AF9C0B12FF525BD5364F21'
+    // Correção: Usando a variável para montar o link perfeito (sem //)
+    returnURL: `${RAILWAY_URL}/auth/steam/return`,
+    realm: `${RAILWAY_URL}/`,
+    apiKey: STEAM_API_KEY
   },
+  function(identifier, profile, done) {
+    // Aqui a Steam devolveu os dados do usuário!
+    return done(null, profile);
+  }
 ));
 
-// Configuração da Sessão (Memória do servidor)
+// Configuração da Sessão
 app.use(session({
     secret: 'segredo_do_bloc_gg',
     resave: true,
@@ -44,22 +49,22 @@ app.use(express.static(__dirname));
 
 // --- ROTAS (Os caminhos do site) ---
 
-// 1. Rota para iniciar o login (Quando clicar no botão)
+// 1. Rota para iniciar o login
 app.get('/auth/steam',
   passport.authenticate('steam'),
   function(req, res) {
-    // A função não faz nada, pois o request é redirecionado para a Steam
+    // Redireciona para a Steam
   });
 
-// 2. Rota de volta (Quando a Steam devolve o usuário)
+// 2. Rota de volta (Retorno da Steam)
 app.get('/auth/steam/return',
   passport.authenticate('steam', { failureRedirect: '/' }),
   function(req, res) {
-    // Login com sucesso! Vai para a dashboard ou home
+    // SUCESSO: Volta para a página inicial
     res.redirect('/');
   });
 
-// 3. Rota para o Front-end saber quem está logado
+// 3. Rota para o Front-end pegar os dados
 app.get('/user', (req, res) => {
     if (req.isAuthenticated()) {
         res.json({ 
@@ -78,7 +83,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-// O Railway vai te dar uma porta (process.env.PORT). Se não der, usa a 3000.
+// Porta do Servidor (Railway ou Local)
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
