@@ -1,0 +1,1361 @@
+/* Reset básico para tirar margens padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0f1014; /* Fundo quase preto, estilo scope.gg */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+/* Barra de Navegação */
+.navbar {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Isso centraliza a imagem grande verticalmente */
+    padding: 0 50px;
+    background-color: rgba(15, 16, 20, 0.95);
+    border-bottom: 1px solid #2a2b30;
+    /* ADICIONE ESSA LINHA: */
+    overflow: hidden; /* Segredo: corta o que sobrar da imagem */
+}
+
+/* Ajuste da Logo */
+.logo img {
+    /* Mude de 50px para algo bem maior */
+    height: 130px; /* Teste esse valor. O flexbox da navbar vai centralizar, e o overflow vai cortar as sobras */
+    width: auto;
+    display: block;
+    /* Um ajuste fino para garantir que ela não distorça */
+    object-fit: contain; 
+}
+
+.menu a {
+    text-decoration: none;
+    color: #aaa;
+    margin-left: 20px;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #fff;
+}
+
+/* Botão da Steam */
+.btn-login {
+    background-color: #171a21; /* Cor oficial do fundo da Steam */
+    color: #c5c3c0; /* Cor oficial da fonte da Steam */
+    border: 1px solid transparent; /* Sem borda por padrão */
+    padding: 10px 20px;
+    border-radius: 2px; /* A Steam usa botões mais quadrados */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 12px;
+    transition: all 0.2s;
+    
+    /* Um truque para colocar o ícone da Steam (via FontAwesome) antes do texto, se quiser */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-login:hover {
+    background-color: #2a475e; /* Azul clássico da Steam ao passar o mouse */
+    color: #ffffff;
+    cursor: pointer;
+    transform: translateY(-2px); /* Efeito de "clique" subindo */
+}
+
+/* Hero Section (A parte principal) */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    /* AQUI ESTÁ A MÁGICA */
+    /* Usamos um degradê preto por cima da imagem para o texto ficar legível */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bg.jpg');
+    
+    /* Isso faz a imagem cobrir tudo sem distorcer e ficar centralizada */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Um efeito visual extra: borda inferior sutil */
+    border-bottom: 1px solid #333;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+/* O destaque laranja/amarelo característico */
+.highlight {
+    color: #ffc107; 
+}
+
+p {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 40px;
+}
+
+/* Botão Principal */
+.btn-primary {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #e0a800;
+    transform: scale(1.05); /* Aumenta um pouquinho ao passar o mouse */
+}/* Efeito de brilho no botão */
+.btn-primary {
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.4); /* Sombra amarela suave */
+}
+
+/* Sombra no texto principal para destacar do fundo */
+h1 {
+    text-shadow: 2px 2px 4px #000000;
+}/* Seção de Features */
+.features-section {
+    background-color: #0f1014; /* Mantendo o fundo escuro */
+    padding: 80px 50px;
+    display: flex; /* Mágica: Coloca os filhos um ao lado do outro */
+    justify-content: center; /* Centraliza o grupo na tela */
+    gap: 30px; /* Espaço entre os cards */
+    flex-wrap: wrap; /* Se a tela for pequena, os cards descem pra linha de baixo */
+}
+
+/* O visual de cada Cartão */
+.card {
+    background-color: #1a1c24; /* Um pouco mais claro que o fundo pra destacar */
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+    border: 1px solid #2a2b30;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+/* Efeito ao passar o mouse no card */
+.card:hover {
+    transform: translateY(-10px); /* O card sobe um pouquinho */
+    border-color: #ffc107; /* Borda fica amarela */
+}
+
+.icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #ffc107; /* ADICIONE ISSO: A cor amarela do tema */
+}
+
+.card h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.card p {
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 0; /* Remove a margem extra do parágrafo global */
+}/* Seção da Tabela */
+.matches-section {
+    background-color: #0f1014;
+    padding: 50px;
+    text-align: center;
+}
+
+.matches-section h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+/* Container para centralizar a tabela */
+.table-container {
+    max-width: 1000px;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #1a1c24;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #2a2b30;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaços duplos entre bordas */
+    color: #ddd;
+}
+
+th {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    color: #888;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #25262c;
+    text-align: left;
+}
+
+/* Estilos específicos para deixar bonito */
+.map-name {
+    font-weight: bold;
+    color: #fff;
+}
+
+.win {
+    color: #4caf50; /* Verde */
+    font-weight: bold;
+}
+
+.loss {
+    color: #f44336; /* Vermelho */
+    font-weight: bold;
+}
+
+/* As "bolinhas" de nota (S, A, B) */
+.rating {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #000;
+    font-weight: bold;
+}
+
+.s-tier, .s-plus-tier {
+    background-color: #ffc107; /* Amarelo Scope */
+}
+
+.b-tier {
+    background-color: #ccc; /* Cinza */
+}/* Rodapé */
+.footer {
+    background-color: #000000; /* Preto total para separar do resto */
+    padding: 60px 0 20px 0;
+    border-top: 1px solid #1a1c24;
+    margin-top: 50px;
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 40px 20px;
+}
+
+.footer-logo {
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.footer-logo p {
+    font-size: 12px;
+    color: #555;
+    margin-top: 10px;
+    font-weight: normal;
+}
+
+.footer-links h4 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    display: block; /* Faz cada link ficar em uma linha separada */
+    color: #777;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #ffc107; /* Amarelo ao passar o mouse */
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #333;
+    font-size: 12px;
+    border-top: 1px solid #111;
+    padding-top: 20px;
+}/* --- RESPONSIVIDADE (Versão Celular) --- */
+@media (max-width: 768px) {
+    
+    /* 1. O texto da capa diminui para caber na tela */
+    h1 {
+        font-size: 36px;
+        padding: 0 20px; /* Margem lateral para não colar na borda */
+    }
+
+    /* 2. Os cards ficam um EMBAIXO do outro, não ao lado */
+    .features-section {
+        flex-direction: column; /* Muda de linha para coluna */
+        align-items: center;
+        padding: 50px 20px;
+    }
+
+    /* 3. A tabela ganha uma barra de rolagem só nela (não quebra o site) */
+    .table-container {
+        overflow-x: auto; /* Permite deslizar o dedo para ver o resto da tabela */
+        width: 100%;
+    }
+
+    /* 4. Ajustes no Menu para não quebrar */
+    .navbar {
+        padding: 0 20px; /* Menos espaço nas laterais */
+    }
+    
+    /* Esconde os links de texto no celular para não bagunçar, deixa só o botão Entrar (opcional) */
+    .menu a:not(.btn-login) {
+        display: none; 
+    }
+}/* --- ESTILOS DA LOJA / PREÇOS --- */
+
+.store-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.store-header {
+    margin-bottom: 60px;
+}
+
+.store-header p {
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* Grid de Preços */
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Ajusta para celular */
+    align-items: center; /* Alinha verticalmente */
+}
+
+/* O Cartão de Preço */
+.price-card {
+    background-color: #1a1c24;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 40px 30px;
+    width: 300px;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.price-card:hover {
+    transform: translateY(-10px);
+    border-color: #555;
+}
+
+.price-card h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.price {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.price .period {
+    font-size: 16px;
+    color: #777;
+    font-weight: normal;
+}
+
+/* Lista de Vantagens */
+.features-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.features-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #25262c;
+    color: #ddd;
+    font-size: 14px;
+}
+
+.features-list li i {
+    margin-right: 10px;
+    color: #4caf50; /* Verde para Check */
+}
+
+.features-list li.disabled {
+    color: #555; /* Texto apagado */
+}
+
+.features-list li.disabled i {
+    color: #555; /* X cinza */
+}
+
+/* Botões do Plano */
+.btn-plan {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #555;
+    color: #fff;
+}
+
+.btn-outline:hover {
+    border-color: #fff;
+}
+
+/* --- DESTAQUE PARA O PLANO VIP (MEIO) --- */
+.price-card.featured {
+    background-color: #1f2129;
+    border: 2px solid #ffc107; /* Borda Amarela */
+    transform: scale(1.05); /* Um pouco maior que os outros */
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
+}
+
+.price-card.featured:hover {
+    transform: scale(1.08);
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffc107;
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+
+    /* --- PÁGINA DE SERVIDORES --- */
+
+.servers-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-header {
+    margin-bottom: 50px;
+}
+
+.servers-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.server-card {
+    background-color: #1a1c24;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.server-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+/* Bolinha de Status (Online/Offline) */
+.server-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.server-status.online {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    border: 1px solid #4caf50;
+}
+
+.server-status.maintenance {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    border: 1px solid #f44336;
+}
+
+.server-icon {
+    font-size: 40px;
+    color: #ffc107;
+    margin-bottom: 20px;
+}
+
+.server-card h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.server-card p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Caixa do IP com botão de copiar */
+.ip-box {
+    background-color: #111;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px dashed #333;
+}
+
+.ip-box span {
+    font-family: monospace;
+    color: #ddd;
+    font-size: 12px;
+}
+
+.btn-copy {
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-copy:hover {
+    color: #fff;
+}
+
+/* Botão Conectar */
+.btn-connect {
+    display: block;
+    background-color: #2a2b30;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-connect:hover {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.btn-connect.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+/* --- PÁGINA DE SERVIDORES --- */
+
+.servers-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-header {
+    margin-bottom: 50px;
+}
+
+.servers-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.server-card {
+    background-color: #1a1c24;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.server-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+/* Bolinha de Status (Online/Offline) */
+.server-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.server-status.online {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    border: 1px solid #4caf50;
+}
+
+.server-status.maintenance {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    border: 1px solid #f44336;
+}
+
+.server-icon {
+    font-size: 40px;
+    color: #ffc107;
+    margin-bottom: 20px;
+}
+
+.server-card h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.server-card p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Caixa do IP com botão de copiar */
+.ip-box {
+    background-color: #111;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px dashed #333;
+}
+
+.ip-box span {
+    font-family: monospace;
+    color: #ddd;
+    font-size: 12px;
+}
+
+.btn-copy {
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-copy:hover {
+    color: #fff;
+}
+
+/* Botão Conectar */
+.btn-connect {
+    display: block;
+    background-color: #2a2b30;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-connect:hover {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.btn-connect.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+}/* --- ESTILO PARA SERVIDORES TRANCADOS --- */
+
+/* Caixa de aviso amarela */
+.vip-notice {
+    background-color: rgba(255, 193, 7, 0.1); /* Fundo amarelo transparente */
+    border: 1px dashed #ffc107;
+    color: #ffc107;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Botão de Liberar Acesso */
+/* BOTÃO VIP TURBINADO */
+a.vip-btn {
+    background-color: #ffc107;
+    color: #000;
+    font-weight: 800; /* Extra Negrito */
+    text-transform: uppercase;
+    text-decoration: none; /* REMOVE O SUBLINHADO FEIO */
+    padding: 15px 0; /* Mais altura para o botão */
+    display: block; /* Ocupa a largura total do card */
+    text-align: center;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3); /* Sombra amarela */
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+a.vip-btn:hover {
+    background-color: #ffdb58; /* Fica mais claro ao passar o mouse */
+    transform: translateY(-3px); /* Sobe um pouquinho */
+    cursor: pointer;
+}
+
+.vip-btn:hover {
+    background-color: #e0a800;
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.4); /* Brilho amarelo */
+}
+
+/* Efeito opcional: Deixar o ícone de cadeado cinza escuro */
+.locked .server-icon {
+    color: #555; 
+}/* --- PÁGINA DE SERVIDORES --- */
+
+.servers-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-header {
+    margin-bottom: 50px;
+}
+
+.servers-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.server-card {
+    background-color: #1a1c24;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.server-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+.server-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.server-status.online {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    border: 1px solid #4caf50;
+}
+
+.server-status.maintenance {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    border: 1px solid #f44336;
+}
+
+.server-icon {
+    font-size: 40px;
+    color: #ffc107;
+    margin-bottom: 20px;
+}
+
+.server-card h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.server-card p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.ip-box {
+    background-color: #111;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px dashed #333;
+}
+
+.ip-box span {
+    font-family: monospace;
+    color: #ddd;
+    font-size: 12px;
+}
+
+.btn-copy {
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-copy:hover {
+    color: #fff;
+}
+
+.btn-connect {
+    display: block;
+    background-color: #2a2b30;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-connect:hover {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.btn-connect.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}/* Forçar o botão a ser amarelo sempre */
+.vip-btn {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}
+
+/* Quando passar o mouse, ele escurece um pouco pra dar feedback */
+.vip-btn:hover {
+    background-color: #dba606 !important;
+}/* --- PÁGINA DE REGRAS --- */
+
+
+.rules-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsivo automático */
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.rules-card {
+    background-color: #1a1c24;
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 4px solid #ffc107; /* Detalhe amarelo na lateral */
+}
+/* --- CONTINUAÇÃO DAS REGRAS (Alinhamento Corrigido) --- */
+
+.rules-card {
+    background-color: #1a1c24;
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 4px solid #ffc107;
+    /* Isso garante que todos tenham a mesma altura */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.rules-card ul {
+    flex-grow: 1; /* Empurra o conteúdo pra preencher o espaço */
+}
+
+.rules-card li {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #ccc;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+}
+
+.allowed i { color: #4caf50; }
+.forbidden i { color: #f44336; }
+
+.ban-appeal {
+    background-color: #111;
+    border: 1px solid #333;
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+.ban-appeal h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.ban-appeal p {
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #777;
+    color: #fff;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-outline:hover {
+    border-color: #ffc107;
+    color: #ffc107;
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+/* --- PÁGINA DE EQUIPE (Staff) --- */
+
+.team-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.member-card {
+    background-color: #1a1c24;
+    border-radius: 10px;
+    padding: 40px 20px;
+    width: 300px;
+    transition: transform 0.3s;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.member-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Bordas coloridas */
+.member-card.owner { border-top: 4px solid #ffc107; }
+.member-card.admin { border-top: 4px solid #f44336; }
+.member-card.mod { border-top: 4px solid #2196f3; }
+
+/* Avatar */
+.member-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #333;
+    padding: 3px;
+}
+
+.owner .member-avatar img { border-color: #ffc107; }
+
+/* Infos */
+.member-info h3 {
+    color: #fff;
+    margin: 10px 0;
+    font-size: 22px;
+}
+
+.member-info p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.role-owner { background-color: rgba(255, 193, 7, 0.2); color: #ffc107; }
+.role-admin { background-color: rgba(244, 67, 54, 0.2); color: #f44336; }
+.role-mod { background-color: rgba(33, 150, 243, 0.2); color: #2196f3; }
+
+.member-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.member-socials a {
+    color: #555;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.member-socials a:hover {
+    color: #fff;
+}/* --- PÁGINA DE SUPORTE --- */
+
+.support-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.support-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.support-card {
+    background-color: #1a1c24;
+    padding: 40px 30px;
+    border-radius: 10px;
+    width: 300px;
+    border: 1px solid #333;
+    transition: transform 0.3s;
+}
+
+.support-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+.support-icon {
+    font-size: 40px;
+    color: #ffc107;
+    margin-bottom: 20px;
+}
+
+.support-card h3 { color: #fff; margin-bottom: 10px; }
+.support-card p { color: #aaa; font-size: 14px; margin-bottom: 30px; }
+
+/* Botão de Suporte */
+.btn-support {
+    display: block;
+    padding: 12px;
+    background-color: #2a2b30;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.btn-support:hover {
+    background-color: #ffc107;
+    color: #000;
+}
+
+/* Estilo especial para cartão de Denúncia */
+.support-card.warning .support-icon { color: #f44336; }
+
+.btn-warning:hover {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* FAQ */
+.faq-section {
+    text-align: left;
+    background: #15161a;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+.faq-item { margin-bottom: 20px; }
+.faq-item strong { color: #ffc107; display: block; margin-bottom: 5px; }
+.faq-item p { color: #ccc; font-size: 14px; margin: 0; }
+
+
+/* --- PÁGINA DE BANS --- */
+
+.bans-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.banned-player {
+    color: #f44336;
+    font-weight: bold;
+}
+
+/* Tags de Banimento */
+.ban-tag {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.ban-tag.perm {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    border: 1px solid #f44336;
+}
+
+.ban-tag.temp {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}/* --- PÁGINA DE PARCERIAS --- */
+
+.partners-container {
+    padding: 120px 20px 50px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.partners-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+}
+
+.partner-card {
+    background-color: #1a1c24;
+    padding: 30px;
+    border-radius: 10px;
+    width: 280px;
+    border: 1px solid #333;
+    transition: transform 0.3s;
+}
+
+.partner-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffc107;
+}
+
+.partner-logo {
+    font-size: 50px;
+    color: #ffc107;
+    margin-bottom: 20px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partner-card h3 { color: #fff; margin-bottom: 10px; }
+.partner-card p { color: #888; font-size: 14px; margin-bottom: 20px; }
+
+/* Botão pequeno para o card */
+.btn-outline.small {
+    padding: 8px 20px;
+    font-size: 12px;
+}
+
+/* --- SEÇÃO "SEJA UM PARCEIRO" --- */
+.become-partner {
+    background: linear-gradient(45deg, #1a1c24, #111);
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de brilho na borda */
+.become-partner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 4px; height: 100%;
+    background-color: #ffc107;
+}
+
+.partner-content {
+    max-width: 600px;
+}
+
+.partner-content h2 {
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.partner-content p {
+    color: #ccc;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.requirements {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px;
+    text-align: left;
+    display: inline-block; /* Para centralizar a lista */
+}
+
+.requirements li {
+    margin-bottom: 10px;
+    color: #ddd;
+}
+
+.requirements li i {
+    color: #ffc107;
+    margin-right: 10px;
+}/* --- CORREÇÃO DA SEÇÃO DE PARCERIA --- */
+
+.partner-content {
+    max-width: 600px;
+    /* Mágica para alinhar tudo em uma coluna vertical */
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2; /* Garante que fique na frente do fundo */
+}
+
+.partner-content h2 {
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.partner-content p {
+    color: #ccc;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.requirements {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px; /* Espaço extra antes do botão */
+    text-align: left;
+    width: 100%; /* Garante que a lista tenha espaço */
+    max-width: 350px; /* Limita a largura para ficar centralizado bonito */
+}
+
+.requirements li {
+    margin-bottom: 10px;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.requirements li i {
+    color: #ffc107;
+    font-size: 14px;
+}
+
+/* Ajuste específico para o botão dessa área não quebrar */
+.partner-content .btn-primary {
+    margin-top: 10px;
+    white-space: nowrap; /* Impede o texto de quebrar linha */
+    padding: 15px 40px;
+    display: inline-block;
+}
