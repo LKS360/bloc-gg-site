@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | BLOC.GG</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- MENU (Simplificado para Admin) -->
+    <nav class="navbar admin-navbar">
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="BLOC.GG Logo"></a>
+        </div>
+        <div class="menu">
+            <span class="admin-badge"><i class="fa-solid fa-shield-halved"></i> MODO ADMIN</span>
+            <a href="index.html">Sair do Painel</a>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        
+        <header class="admin-header">
+            <h1>Visão Geral</h1>
+            <p>Bem-vindo de volta, Chefe.</p>
+        </header>
+
+        <!-- DASHBOARD GRID -->
+        <div class="admin-stats">
+            <div class="admin-card">
+                <h3>Receita Mensal (Est.)</h3>
+                <div class="val">R$ 450,00</div>
+                <div class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> +12%</div>
+            </div>
+            <div class="admin-card">
+                <h3>Novos Jogadores</h3>
+                <div class="val">128</div>
+                <div class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> +5%</div>
+            </div>
+            <div class="admin-card">
+                <h3>Tickets Abertos</h3>
+                <div class="val">3</div>
+                <div class="trend down"><i class="fa-solid fa-circle-exclamation"></i> Atenção</div>
+            </div>
+            <div class="admin-card">
+                <h3>Status do Servidor</h3>
+                <div class="val" style="color: #4caf50;">ONLINE</div>
+                <div class="trend">128 Tick</div>
+            </div>
+        </div>
+
+        <!-- LISTA DE ÚLTIMOS ACESSOS (Vamos popular via JS) -->
+        <div class="admin-section">
+            <h2>Últimos Logins no Site</h2>
+            <div class="table-container">
+                <table id="login-table">
+                    <thead>
+                        <tr>
+                            <th>Horário</th>
+                            <th>Usuário</th>
+                            <th>SteamID</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- O Javascript vai preencher aqui -->
+                        <tr>
+                            <td>12:30</td>
+                            <td>Fallen_Real</td>
+                            <td>76561198000000001</td>
+                            <td><span class="ban-tag temp">Login</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script de Segurança (Simples) -->
+    <script src="main.js"></script>
+    <script>
+        // Verificação de segurança no Front-end
+        // ATENÇÃO: Substitua pelo SEU SteamID64 real!
+        const DONO_STEAM_ID = '76561198000000000'; // <--- COLOQUE SEU ID AQUI
+
+        fetch('/user')
+            .then(res => res.json())
+            .then(data => {
+                if (!data.logged || data.user.id !== DONO_STEAM_ID) {
+                    alert("ÁREA RESTRITA: Você não é o dono!");
+                    window.location.href = '/index.html';
+                }
+            });
+    </script>
+
+</body>
+</html>

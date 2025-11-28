@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil | BLOC.GG</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- MENU -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="BLOC.GG Logo"></a>
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="servidores.html">Servidores</a>
+            <a href="loja.html">Loja VIP</a>
+            <a href="equipe.html">Equipe</a>
+            <a href="/auth/steam" class="btn-login">CARREGANDO...</a>
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO DO PERFIL -->
+    <div class="profile-container">
+        
+        <!-- Cabeçalho do Jogador -->
+        <div class="profile-header-card">
+            <div class="profile-avatar">
+                <img id="user-avatar" src="https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" alt="Avatar">
+            </div>
+            <div class="profile-info">
+                <h1 id="user-name">Carregando...</h1>
+                <div class="steam-id-box">
+                    <span id="user-steamid">STEAM_0:0:00000000</span>
+                    <button onclick="copiarSteamID()" class="btn-copy-id"><i class="fa-regular fa-copy"></i></button>
+                </div>
+                <span class="vip-badge">MEMBRO GRATUITO</span> <!-- Mude via JS depois se tiver lógica VIP -->
+            </div>
+            <div class="profile-actions">
+                <a href="loja.html" class="btn-upgrade">VIRAR VIP</a>
+                <a href="/logout" class="btn-logout">SAIR DA CONTA</a>
+            </div>
+        </div>
+
+        <!-- Estatísticas (Fictícias por enquanto) -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>K/D Ratio</h3>
+                <div class="stat-value">1.24</div>
+                <div class="stat-desc">Top 15% do servidor</div>
+            </div>
+            <div class="stat-card">
+                <h3>Headshot %</h3>
+                <div class="stat-value">48%</div>
+                <div class="stat-desc">Precisa melhorar a mira!</div>
+            </div>
+            <div class="stat-card">
+                <h3>Tempo Jogado</h3>
+                <div class="stat-value">42h</div>
+                <div class="stat-desc">Viciado no servidor</div>
+            </div>
+            <div class="stat-card">
+                <h3>Patente</h3>
+                <div class="stat-value" style="color: #ffc107;">ELITE</div>
+                <div class="stat-desc">Ranking Geral #45</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">BLOC.GG <p>A nova casa do seu CS2 competitivo.</p></div>
+            <div class="footer-links">
+                <h4>Comunidade</h4>
+                <a href="https://discord.gg/zcCNP3wxtn" target="_blank">Entrar no Discord</a>
+                <a href="regras.html">Regras do Server</a>
+                <a href="bans.html">Lista de Banimentos</a>
+            </div>
+            <div class="footer-links">
+                <h4>Suporte</h4>
+                <a href="equipe.html">Equipe</a>
+                <a href="suporte.html">Abrir Ticket</a>
+                <a href="suporte.html">Denunciar Cheater</a>
+                <a href="parcerias.html">Parcerias</a>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2025 Bloc.gg. Todos os direitos reservados.</div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        function copiarSteamID() {
+            const idText = document.getElementById('user-steamid').innerText;
+            navigator.clipboard.writeText(idText);
+            alert("SteamID copiado!");
+        }
+    </script>
+</body>
+</html>
