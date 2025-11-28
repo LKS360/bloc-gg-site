@@ -19,15 +19,14 @@ passport.deserializeUser((obj, done) => {
 });
 
 passport.use(new SteamStrategy({
-    returnURL: 'http://localhost:3000/auth/steam/return',
-    realm: 'http://localhost:3000/',
-    apiKey: STEAM_API_KEY
+    // CUIDADO: Mantenha o final /auth/steam/return
+    returnURL: 'https://bloc-gg-site-production.up.railway.app//auth/steam/return',
+    
+    // Aqui é só o link base com a barra no final
+    realm: 'https://bloc-gg-site-production.up.railway.app/',
+    
+    apiKey: A7FCD68DE3AF9C0B12FF525BD5364F21
   },
-  function(identifier, profile, done) {
-    // Aqui a Steam devolveu os dados do usuário!
-    // O 'profile' tem o Nick, Avatar, SteamID, etc.
-    return done(null, profile);
-  }
 ));
 
 // Configuração da Sessão (Memória do servidor)
