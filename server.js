@@ -25,7 +25,7 @@ passport.use(new SteamStrategy({
     // Aqui é só o link base com a barra no final
     realm: 'https://bloc-gg-site-production.up.railway.app/',
     
-    apiKey: A7FCD68DE3AF9C0B12FF525BD5364F21
+    apiKey: 'A7FCD68DE3AF9C0B12FF525BD5364F21'
   },
 ));
 
