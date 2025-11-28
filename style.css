@@ -194,4 +194,24 @@ td { padding: 20px 15px; border-bottom: 1px solid #25262c; text-align: left; }
     .become-partner { flex-direction: column; text-align: center; }
     .profile-header-card { justify-content: center; text-align: center; }
     .profile-actions { width: 100%; }
+}/* --- Botão Admin (Personalizado) --- */
+.btn-admin {
+    background-color: rgba(255, 68, 68, 0.15); /* Fundo vermelho bem suave */
+    color: #ff4444 !important; /* Texto vermelho neon */
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre ícone e texto */
+}
+
+.btn-admin:hover {
+    background-color: rgba(255, 68, 68, 0.3);
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.2);
+    transform: translateY(-1px);
 }

@@ -88,4 +88,48 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`✅ Servidor rodando na porta ${PORT}`);
+});// ... (O início do arquivo continua igual) ...
+
+// --- LISTA DE ADMINS ---
+// Coloca aqui o teu SteamID64 (aquele número longo)
+const ADMIN_IDS = [
+    '76561198000000000', // <--- SUBSTITUI PELO TEU ID DA STEAM
+    'OUTRO_ID_SE_QUISERES' 
+];
+
+// ... (Configurações do Passport continuam iguais) ...
+
+// --- ROTAS ATUALIZADAS ---
+
+// 1. Rota para iniciar o login
+app.get('/auth/steam',
+  passport.authenticate('steam'),
+  function(req, res) {
+    // Redireciona para a Steam
+  });
+
+// 2. Rota de volta (Retorno da Steam)
+app.get('/auth/steam/return',
+  passport.authenticate('steam', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+// 3. Rota INTELIGENTE para o Front-end
+app.get('/user', (req, res) => {
+    if (req.isAuthenticated()) {
+        // Verifica se o ID do usuário está na lista de ADMINS
+        const steamID = req.user.id; // O Passport salva o ID aqui
+        const isUserAdmin = ADMIN_IDS.includes(steamID);
+
+        res.json({ 
+            logged: true, 
+            user: req.user,
+            isAdmin: isUserAdmin // Envia TRUE se for admin, FALSE se não for
+        });
+    } else {
+        res.json({ logged: false, isAdmin: false });
+    }
 });
+
+// ... (Resto do arquivo, logout e listen continuam iguais)

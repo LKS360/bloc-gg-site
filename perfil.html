@@ -102,5 +102,35 @@
             alert("SteamID copiado!");
         }
     </script>
+    <script>
+    // Função que roda assim que o site carrega
+    window.onload = function() {
+        fetch('/user')
+            .then(response => response.json())
+            .then(data => {
+                const btnAdmin = document.querySelector('.btn-admin');
+                const btnLogin = document.querySelector('.btn-login');
+
+                // Por padrão, esconde o botão Admin
+                if(btnAdmin) btnAdmin.style.display = 'none';
+
+                if (data.logged) {
+                    // Usuário está logado
+                    btnLogin.innerHTML = `<img src="${data.user.photos[0].value}" style="width:24px;border-radius:50%;vertical-align:middle;margin-right:5px;"> ${data.user.displayName}`;
+                    btnLogin.href = "/logout"; // Muda o botão para Logout
+                    
+                    // SE FOR ADMIN, MOSTRA O BOTÃO!
+                    if (data.isAdmin && btnAdmin) {
+                        btnAdmin.style.display = 'flex'; // Torna visível
+                    }
+                } else {
+                    // Não está logado
+                    btnLogin.textContent = 'LOGIN STEAM';
+                    btnLogin.href = "/auth/steam";
+                }
+            })
+            .catch(error => console.error('Erro ao verificar login:', error));
+    };
+</script>
 </body>
 </html>
