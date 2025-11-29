@@ -1,3 +1,5 @@
+require('dotenv').config(); // <--- OBRIGATÓRIO: Carrega o cofre .env
+
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -5,38 +7,20 @@ const SteamStrategy = require('passport-steam').Strategy;
 
 const app = express();
 
-// --- CONFIGURAÇÃO ---
-// Sua API Key da Steam
-const STEAM_API_KEY = 'A7FCD68DE3AF9C0B12FF525BD5364F21'; 
+// --- CONFIGURAÇÃO DE SEGURANÇA ---
+// Agora o código busca as variáveis dentro do arquivo .env
+const STEAM_API_KEY = process.env.STEAM_API_KEY;
+const RAILWAY_URL = process.env.RAILWAY_URL || 'http://localhost:3000';
 
-// SEU LINK DO RAILWAY (Sem barra no final para facilitar)
-// IMPORTANTE: Se o link do Railway mudar, altere apenas aqui!
-const RAILWAY_URL = 'https://bloc-gg-site-production.up.railway.app';
-
-// Configuração do Passport (o porteiro)
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
-});
-
-passport.use(new SteamStrategy({
-    // Correção: Usando a variável para montar o link perfeito (sem //)
-    returnURL: `${RAILWAY_URL}/auth/steam/return`,
-    realm: `${RAILWAY_URL}/`,
-    apiKey: STEAM_API_KEY
-  },
-  function(identifier, profile, done) {
-    // Aqui a Steam devolveu os dados do usuário!
-    return done(null, profile);
-  }
-));
+// Lista de Admins (Pega do .env ou adiciona manualmente aqui)
+const ADMIN_IDS = [
+    process.env.OWNER_ID, 
+    '76561198000000001' // Pode adicionar mais IDs aqui separando por vírgula
+];
 
 // Configuração da Sessão
 app.use(session({
-    secret: 'segredo_do_bloc_gg',
+    secret: process.env.SESSION_SECRET || 'segredo_padrao_dev',
     resave: true,
     saveUninitialized: true
 }));
@@ -44,35 +28,58 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve os arquivos HTML/CSS da sua pasta atual
+// Configuração do Passport (Steam)
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+    done(null, obj);
+});
+
+passport.use(new SteamStrategy({
+    returnURL: `${RAILWAY_URL}/auth/steam/return`,
+    realm: `${RAILWAY_URL}/`,
+    apiKey: STEAM_API_KEY
+  },
+  function(identifier, profile, done) {
+    return done(null, profile);
+  }
+));
+
+// Servir os arquivos HTML/CSS/JS da pasta atual
 app.use(express.static(__dirname));
 
-// --- ROTAS (Os caminhos do site) ---
+// --- ROTAS DO SITE ---
 
-// 1. Rota para iniciar o login
+// 1. Rota de Login (Manda pra Steam)
 app.get('/auth/steam',
   passport.authenticate('steam'),
   function(req, res) {
-    // Redireciona para a Steam
+    // A função não faz nada, pois o redirect acontece antes
   });
 
-// 2. Rota de volta (Retorno da Steam)
+// 2. Rota de Retorno (Volta da Steam)
 app.get('/auth/steam/return',
   passport.authenticate('steam', { failureRedirect: '/' }),
   function(req, res) {
-    // SUCESSO: Volta para a página inicial
     res.redirect('/');
   });
 
-// 3. Rota para o Front-end pegar os dados
+// 3. Rota API: Diz ao Front-end quem está logado e se é Admin
 app.get('/user', (req, res) => {
     if (req.isAuthenticated()) {
+        // Verifica se o ID do usuário está na lista de ADMINS
+        const steamID = req.user._json.steamid; 
+        const isUserAdmin = ADMIN_IDS.includes(steamID);
+
         res.json({ 
             logged: true, 
-            user: req.user 
+            user: req.user,
+            isAdmin: isUserAdmin // Envia TRUE se for admin
         });
     } else {
-        res.json({ logged: false });
+        res.json({ logged: false, isAdmin: false });
     }
 });
 
@@ -83,53 +90,9 @@ app.get('/logout', (req, res) => {
     });
 });
 
-// Porta do Servidor (Railway ou Local)
+// Inicia o Servidor
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-  console.log(`✅ Servidor rodando na porta ${PORT}`);
-});// ... (O início do arquivo continua igual) ...
-
-// --- LISTA DE ADMINS ---
-// Coloca aqui o teu SteamID64 (aquele número longo)
-const ADMIN_IDS = [
-    '76561198000000000', // <--- SUBSTITUI PELO TEU ID DA STEAM
-    'OUTRO_ID_SE_QUISERES' 
-];
-
-// ... (Configurações do Passport continuam iguais) ...
-
-// --- ROTAS ATUALIZADAS ---
-
-// 1. Rota para iniciar o login
-app.get('/auth/steam',
-  passport.authenticate('steam'),
-  function(req, res) {
-    // Redireciona para a Steam
-  });
-
-// 2. Rota de volta (Retorno da Steam)
-app.get('/auth/steam/return',
-  passport.authenticate('steam', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-// 3. Rota INTELIGENTE para o Front-end
-app.get('/user', (req, res) => {
-    if (req.isAuthenticated()) {
-        // Verifica se o ID do usuário está na lista de ADMINS
-        const steamID = req.user.id; // O Passport salva o ID aqui
-        const isUserAdmin = ADMIN_IDS.includes(steamID);
-
-        res.json({ 
-            logged: true, 
-            user: req.user,
-            isAdmin: isUserAdmin // Envia TRUE se for admin, FALSE se não for
-        });
-    } else {
-        res.json({ logged: false, isAdmin: false });
-    }
+    console.log(`✅ BLOC.GG rodando na porta ${PORT}`);
+    console.log(`🔗 Link: ${RAILWAY_URL}`);
 });
-
-// ... (Resto do arquivo, logout e listen continuam iguais)
