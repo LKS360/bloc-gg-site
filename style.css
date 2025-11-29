@@ -214,4 +214,32 @@ td { padding: 20px 15px; border-bottom: 1px solid #25262c; text-align: left; }
     background-color: rgba(255, 68, 68, 0.3);
     box-shadow: 0 0 10px rgba(255, 68, 68, 0.2);
     transform: translateY(-1px);
+}/* --- BOTÃO DE ADMIN (ADICIONE NO FINAL) --- */
+.btn-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre ícone e texto */
+    background-color: rgba(220, 53, 69, 0.15); /* Fundo vermelho transparente */
+    color: #ff4444 !important; /* Texto vermelho neon */
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-right: 15px; /* Espaço para não grudar no botão de login */
+    transition: all 0.3s ease;
+}
+
+.btn-admin:hover {
+    background-color: rgba(220, 53, 69, 0.3);
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Ajuste para garantir que o menu fique alinhado */
+.menu {
+    display: flex;
+    align-items: center;
 }
